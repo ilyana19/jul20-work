@@ -37,23 +37,26 @@ class Player
   end
 
   def do_battle(damage)
-    @health_points -= 1
+    @health_points -= damage
 
     if @health_points < 1
       @lives -= 1
+      @health_points = 10
 
       if @lives == 0
         restart
       end
-      @health_points = 10
     end
   end
 
   def restart
-    initialize
+    @gold_coins = 0
+    @health_points = 10
+    @lives = 5
   end
 end
 
+# declare variables
 player1 = Player.new("Faye Phlorik")
 
 puts <<~TEXT
@@ -72,5 +75,53 @@ player1.collect_treasure
 puts <<~TEXT
   #{player1.name} found a treasure box and opened it and received a gold coin.
 
-  #{player1.name} now has #{player1.gold_coins} gold.
+  Current Stats
+  ================
+  Lives: #{player1.lives}
+  HP: #{player1.health_points}
+  Gold: #{player1.gold_coins}
+
+TEXT
+
+20.times do
+  player1.collect_treasure
+  puts "#{player1.name} found a treasure box and opened it and received a gold coin."
+end
+
+puts <<~TEXT
+  Current Stats
+  ================
+  Lives: #{player1.lives}
+  HP: #{player1.health_points}
+  Gold: #{player1.gold_coins}
+
+  #{player1.name} goes on an adventure!
+  ==========================================
+TEXT
+
+player1.do_battle(1)
+puts <<~TEXT
+  #{player1.name} found a treasure box and opened it but it was actually a mimic and the monster.
+
+  Current Stats
+  ================
+  Lives: #{player1.lives}
+  HP: #{player1.health_points}
+  Gold: #{player1.gold_coins}
+
+TEXT
+
+6.times do
+  player1.do_battle(10)
+end
+puts "#{player1.name} found a treasure box and opened it but it was actually a mimic and the monster."
+
+
+puts <<~TEXT
+
+  Current Stats
+  ================
+  Lives: #{player1.lives}
+  HP: #{player1.health_points}
+  Gold: #{player1.gold_coins}
 TEXT
