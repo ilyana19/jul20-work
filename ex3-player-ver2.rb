@@ -115,7 +115,7 @@ TEXT
     if player.event == "monster"
       puts "#{player.name} encountered a monster."
       puts ""
-
+    
       # randomize monster stats (should really be another object...)
       # monster_hp = 2 * Random.rand(1..6)
       monster_hp = 5
